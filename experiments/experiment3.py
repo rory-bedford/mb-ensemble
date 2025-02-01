@@ -18,7 +18,7 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 # environment parameters
 sparsity = 0.2 # sparsity
-patterns = 32*64 # number of patterns
+patterns = 32*32 # number of patterns
 kenyon_cells = 2000 # number of neurons
 positive_ratio = 0.5 # probability of positive valence
 change_rate = [3,15,75] # number of epochs before changing valences
@@ -37,8 +37,8 @@ activation = "relu"
 
 # grid search parameters
 param_grid = {
-    "lower_lr": range(-6, 2),
-    "upper_lr": range(-6, 2),
+    "lower_lr": range(-5, 2),
+    "upper_lr": range(-5, 2),
 }
 grid_search = ParameterGrid(param_grid)
 

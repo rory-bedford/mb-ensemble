@@ -1,0 +1,183 @@
+---
+title: "Flies and smells"
+subtitle: "Connectomics informed modelling of olfactory learning in Drosophila Melanogaster"
+author: "Rory Bedford"
+institute: "MRC LMB"
+format:
+    revealjs:
+        slide-number: true
+        logo: imbizo.png
+        incremental: true
+        smaller: true
+        embed-resources: true
+        include-in-header:
+        - text: |
+            <style>
+            .reveal .slide-logo {
+                max-height: unset;
+                height: 80px;
+            }
+            </style>
+        - text: |
+            <style>
+            .hide-logo .slide-logo {
+              display: none !important;
+            }
+            </style>
+
+---
+
+## Credit assignment
+
+:::: {.columns}
+::: {.column width="60%"}
+* Deep neural networks need to set their weights effectively to function
+* **Backpropagation** is infeasible in biological networks
+* How networks assign credit remains a major area of research in neuroscience
+* Solutions consist of a combination of **synaptic learning rules** and **architectural motifs**
+:::
+
+::: {.column width="40%"}
+![](ann.jpeg)
+:::
+::::
+
+## Dopaminergic error signals
+
+:::: {.columns}
+::: {.column width="40%"}
+![](dopamine.png)
+:::
+
+::: {.column width="60%"}
+* Modulatory signals affect plasticity at the synapse
+* 3-factor learning allows weights to change in an **error-dependent** manner
+* Dopaminergic neurons are traditionally thought to convey **global error** signals
+* Zero-order optimization is **inefficient** in large networks
+* **Research direction:** study the connectivity of dopaminergic neurons in a learning centre
+:::
+::::
+
+## Fruit fly associative learning
+
+:::: {.columns}
+::: {.column width="60%"}
+* Drosophila excel at **classical (Pavlovian) conditioning**, associating stimuli like odors with rewards or punishments
+* Learning is rapid and efficient, often requiring **only a few trials**
+* This provides an excellent **minimal model** of learning
+:::
+
+::: {.column width="40%"}
+![](drosophila.jpg)
+:::
+::::
+
+## The advent of connectomics
+:::: {.columns}
+::: {.column width="40%"}
+![](connectome.png)
+:::
+
+::: {.column width="60%"}
+* Researchers have recently constructed a complete, synaptic-resolution wiring diagram of the adult Drosophila brain *(Schlegel et al. 2024)*
+* Heroic work, using electron-microscopy, machine vision, and extensive curation
+* Allows us to study the learning circuitry of Drosophila in detail
+:::
+::::
+
+## Olfactory processing circuits
+:::: {.columns}
+::: {.column width="60%"}
+* Odors are first detected by **olfactory receptor neurons (ORNs)** and processed in the **Antennal Lobe (AL)**
+* **Projection Neurons (PNs)** relay information to the **Mushroom Body (MB)**, a key center for learning and memory
+* **Kenyon Cells (KCs)** in the MB sparsely encode odors, enhancing pattern separation
+* **Dopaminergic neurons** modulate synapses in response to reward or punishment, reinforcing associative learning
+* **MB output neurons (MBONs)** receive inputs from Kenyon Cells, and drive either attractive or aversive behaviours
+:::
+
+::: {.column width="40%"}
+![](mb.jpg)
+:::
+::::
+
+## Compartmentalised mushroom body structure
+:::: {.columns}
+::: {.column width="40%"}
+![](perceptron.png)
+:::
+
+::: {.column width="60%"}
+* 15 compartments with distinct MBONs representing positive or negative valences
+* Kenyon cells project within a given compartment with little overlap
+* Dopaminergic neurons send error signals within their respective compartments
+* Different lobes known to have different learning rates, and are implicated in associative memory across different timescales
+* The functional role of this structure remains unknown
+:::
+::::
+
+## Research question:
+
+<h1 style="font-size: 36px;">Why is the mushroom body compartmentalised?</h1>
+* How do the following factors affect learning:
+  * The number of compartments
+  * The distribution of compartment valences
+  * The distribution of compartment learning rates
+
+##
+<h1 style="font-size: 34px;">The model:</h1>
+* A simplified ensemble of perceptrons
+* Output logits representing confidence in their respective valences
+* Trained individually with their own error signals
+* Compartment signals integrated to produce a global valence prediction
+
+<h1 style="font-size: 34px;">The task:</h1>
+* Input random binary vectors with biologically accurate dimensionality and sparsity
+* Train to predict valence scores of 1 or -1 associated with each pattern
+
+##
+<h1 style="font-size: 36px;">Comparison of single- vs multi-compartments</h1>
+
+<br>
+<br>
+![](../figures/experiment1_loss_curves.png){fig-align="center"}
+
+##
+<h1 style="font-size: 36px;">Dynamically changing targets</h1>
+
+![](../figures/experiment2_plots.png){fig-align="center"}
+
+##
+<h1 style="font-size: 36px;">Dynamically changing targets</h1>
+
+<br>
+<br>
+![](../figures/experiment2_loss_curves.png){fig-align="center"}
+
+##
+<h1 style="font-size: 36px;">Multiple rates of changing targets</h1>
+
+:::: {.columns}
+::: {.column width="3%"}
+<br>
+:::
+::: {.column width="97%"}
+![](../figures/experiment3_boxplot.png){fig-align="center"}
+:::
+::::
+
+##
+
+<h1 style="font-size: 36px;">Conclusions</h1>
+* Having a number of compartments seems to help learning somewhat
+* An ensemble of perceptrons will find an optimal learning rate for an environment with a given rate of variability in valence assignments
+* Couldn't get a model to work with a variety of different rates of changing valences
+
+<h1 style="font-size: 36px;">Future work</h1>
+* The success of the ensemble model needs further theoretical and computational exploration
+* Need to find a model that works on data with a non-constant rate of change
+
+##
+
+<div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; font-size: 5rem; color: black; font-weight: bold;">
+Thank you
+</div>
